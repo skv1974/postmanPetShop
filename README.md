@@ -1,10 +1,10 @@
 # postmanPetShop
-примеры запросов в открытое API swagger
+Примеры запросов в открытое API swagger
 
-папка createChangeDelete:
+1. Папка createChangeDelete:
 запросы в разрезе User (создание, апдейт, удаление)
 
-папка updateUserStatus
+2. Папка updateUserStatus
 проверка параметров запроса PUT /user/username
 
-все запросы параметризированы на уровне коллекции и содержат тесты
+Все запросы параметризированы на уровне коллекции и содержат тесты
