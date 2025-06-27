@@ -1,0 +1,752 @@
+{
+	"info": {
+		"_postman_id": "0a080ef3-de48-4f65-9e42-4ae01fed4ad5",
+		"name": "PetStore",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "35233156"
+	},
+	"item": [
+		{
+			"name": "createChangeDeleteUser",
+			"item": [
+				{
+					"name": "CreateUser_fulldata",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"message = pm.variables.get('testUserId')\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"code\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.code).to.eql(200);\r",
+									"});\r",
+									"pm.test(\"type\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.type).to.eql('unknown');\r",
+									"});\r",
+									"pm.test(\"message\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.message).to.eql(message);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "https://petstore.swagger.io/v2/swagger.json"
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": {{testUserId}},\r\n  \"username\": \"{{testUserName}}\",\r\n  \"firstName\": \"{{testUserFirstName}}\",\r\n  \"lastName\": \"{{testUserLastName}}\",\r\n  \"email\": \"{{testUserEmail}}\",\r\n  \"password\": \"{{testUserPassword}}\",\r\n  \"phone\": \"{{testUserPhone}}\",\r\n  \"userStatus\": {{testUserStatus}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseLink}}/user"
+					},
+					"response": []
+				},
+				{
+					"name": "InfoUserByName",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"id= parseInt(pm.variables.get('testUserId'))\r",
+									"username= (pm.variables.get('testUserName'))\r",
+									"firstName= pm.variables.get('testUserFirstName')\r",
+									"lastName= pm.variables.get('testUserLastName')\r",
+									"email= pm.variables.get('testUserEmail')\r",
+									"password= pm.variables.get('testUserPassword')\r",
+									"phone= pm.variables.get('testUserPhone')\r",
+									"userStatus= parseInt(pm.variables.get('testUserStatus'))\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"id\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.id).to.eql(Number(id));\r",
+									"});\r",
+									"pm.test(\"userName\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.username).to.eql(username);\r",
+									"});\r",
+									"pm.test(\"password\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.password).to.eql(password);\r",
+									"});\r",
+									"pm.test(\"fName\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.firstName).to.eql(firstName);\r",
+									"});\r",
+									"pm.test(\"lName\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.lastName).to.eql(lastName);\r",
+									"});\r",
+									"pm.test(\"phone\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.phone).to.eql(phone);\r",
+									"});\r",
+									"pm.test(\"email\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.email).to.eql(email);\r",
+									"});\r",
+									"pm.test(\"status\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.userStatus).to.eql(userStatus);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token_petstore}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{baseLink}}/user/{{testUserName}}"
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateUserByName",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"message = pm.variables.get('testUserId')\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"code\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.code).to.eql(200);\r",
+									"});\r",
+									"pm.test(\"type\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.type).to.eql('unknown');\r",
+									"});\r",
+									"pm.test(\"message\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.message).to.eql(message);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token_petstore}}"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": {{testUserId}},\r\n  \"username\": \"{{testUserName}}\",\r\n  \"firstName\": \"SKV\",\r\n  \"lastName\": \"{{testUserLastName}}\",\r\n  \"email\": \"{{testUserEmail}}\",\r\n  \"password\": \"{{testUserPassword}}\",\r\n  \"phone\": \"{{testUserPhone}}\",\r\n  \"userStatus\": {{testUserStatus}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseLink}}/user/{{testUserName}}"
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteUserByName",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"message = pm.variables.get('testUserName')\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"code\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.code).to.eql(200);\r",
+									"});\r",
+									"pm.test(\"type\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.type).to.eql('unknown');\r",
+									"});\r",
+									"pm.test(\"message\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.message).to.eql(message);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token_petstore}}"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseLink}}/user/{{testUserName}}"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "updateUserStatus",
+			"item": [
+				{
+					"name": "UpdateUserByName_Status",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"message = pm.variables.get('testUserId')\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"code\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.code).to.eql(200);\r",
+									"});\r",
+									"pm.test(\"type\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.type).to.eql('unknown');\r",
+									"});\r",
+									"pm.test(\"message\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.message).to.eql(message);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token_petstore}}"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": {{testUserId}},\r\n  \"username\": \"{{testUserName}}\",\r\n  \"firstName\": \"{{testUserFirstName}}\",\r\n  \"lastName\": \"{{testUserLastName}}\",\r\n  \"email\": \"{{testUserEmail}}\",\r\n  \"password\": \"{{testUserPassword}}\",\r\n  \"phone\": \"{{testUserPhone}}\",\r\n  \"userStatus\": 4791\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseLink}}/user/{{testUserName}}"
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateUserByName_StatusOnly",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"message = pm.variables.get('testUserId')\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"code\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.code).to.eql(200);\r",
+									"});\r",
+									"pm.test(\"type\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.type).to.eql('unknown');\r",
+									"});\r",
+									"pm.test(\"message\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.message).to.eql(message);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token_petstore}}"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": {{testUserId}},\r\n  \"username\": \"{{testUserName}}\",\r\n  \"userStatus\": 4791\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseLink}}/user/{{testUserName}}"
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateUserByName_StatusNull",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"message = pm.variables.get('testUserId')\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"code\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.code).to.eql(200);\r",
+									"});\r",
+									"pm.test(\"type\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.type).to.eql('unknown');\r",
+									"});\r",
+									"pm.test(\"message\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.message).to.eql(message);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token_petstore}}"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": {{testUserId}},\r\n  \"username\": \"{{testUserName}}\",\r\n  \"firstName\": \"{{testUserFirstName}}\",\r\n  \"lastName\": \"{{testUserLastName}}\",\r\n  \"email\": \"{{testUserEmail}}\",\r\n  \"password\": \"{{testUserPassword}}\",\r\n  \"phone\": \"{{testUserPhone}}\",\r\n  \"userStatus\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseLink}}/user/{{testUserName}}"
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateUserByName_StatusNumString",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"message = pm.variables.get('testUserId')\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"code\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.code).to.eql(200);\r",
+									"});\r",
+									"pm.test(\"type\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.type).to.eql('unknown');\r",
+									"});\r",
+									"pm.test(\"message\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.message).to.eql(message);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token_petstore}}"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": {{testUserId}},\r\n  \"username\": \"{{testUserName}}\",\r\n  \"firstName\": \"{{testUserFirstName}}\",\r\n  \"lastName\": \"{{testUserLastName}}\",\r\n  \"email\": \"{{testUserEmail}}\",\r\n  \"password\": \"{{testUserPassword}}\",\r\n  \"phone\": \"{{testUserPhone}}\",\r\n  \"userStatus\": \"4444\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseLink}}/user/{{testUserName}}"
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateUserByName_StatusLetString",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"message = 'something bad happened'\r",
+									"\r",
+									"pm.test(\"Status code is 500\", function () {\r",
+									"    pm.response.to.have.status(500);\r",
+									"});\r",
+									"pm.test(\"code\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.code).to.eql(500);\r",
+									"});\r",
+									"pm.test(\"type\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.type).to.eql('unknown');\r",
+									"});\r",
+									"pm.test(\"message\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.message).to.eql(message);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token_petstore}}"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": {{testUserId}},\r\n  \"username\": \"{{testUserName}}\",\r\n  \"firstName\": \"{{testUserFirstName}}\",\r\n  \"lastName\": \"{{testUserLastName}}\",\r\n  \"email\": \"{{testUserEmail}}\",\r\n  \"password\": \"{{testUserPassword}}\",\r\n  \"phone\": \"{{testUserPhone}}\",\r\n  \"userStatus\": \"4444sss\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseLink}}/user/{{testUserName}}"
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateUserByName_StatusSymbols",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"message = 'something bad happened'\r",
+									"\r",
+									"pm.test(\"Status code is 500\", function () {\r",
+									"    pm.response.to.have.status(500);\r",
+									"});\r",
+									"pm.test(\"code\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.code).to.eql(500);\r",
+									"});\r",
+									"pm.test(\"type\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.type).to.eql('unknown');\r",
+									"});\r",
+									"pm.test(\"message\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.message).to.eql(message);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token_petstore}}"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": {{testUserId}},\r\n  \"username\": \"{{testUserName}}\",\r\n  \"firstName\": \"{{testUserFirstName}}\",\r\n  \"lastName\": \"{{testUserLastName}}\",\r\n  \"email\": \"{{testUserEmail}}\",\r\n  \"password\": \"{{testUserPassword}}\",\r\n  \"phone\": \"{{testUserPhone}}\",\r\n  \"userStatus\": \"@%!-->\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseLink}}/user/{{testUserName}}"
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateUserByName_NULLData",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"message = '0'\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"code\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.code).to.eql(200);\r",
+									"});\r",
+									"pm.test(\"type\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.type).to.eql('unknown');\r",
+									"});\r",
+									"pm.test(\"message\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.message).to.eql(message);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token_petstore}}"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseLink}}/user/{{testUserName}}"
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateUserByName_EmptyData",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"message = pm.variables.get('testUserId')\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"code\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.code).to.eql(200);\r",
+									"});\r",
+									"pm.test(\"type\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.type).to.eql('unknown');\r",
+									"});\r",
+									"pm.test(\"message\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.message).to.not.eql(message);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token_petstore}}"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": null,\r\n  \"username\": \"\",\r\n  \"firstName\": \"\",\r\n  \"lastName\": \"\",\r\n  \"email\": \"\",\r\n  \"password\": \"\",\r\n  \"phone\": \"\",\r\n  \"userStatus\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseLink}}/user/{{testUserName}}"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": {
+			"token": "f469c9ac-6ded-4c93-b0be-5f8bad08ace4"
+		}
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "token_petstore",
+			"value": "f469c9ac-6ded-4c93-b0be-5f8bad08ace4",
+			"type": "string"
+		},
+		{
+			"key": "baseLink",
+			"value": "https://petstore.swagger.io/v2",
+			"type": "string"
+		},
+		{
+			"key": "testUserName",
+			"value": "skv1974",
+			"type": "string"
+		},
+		{
+			"key": "testUserPassword",
+			"value": "Qwe123",
+			"type": "string"
+		},
+		{
+			"key": "testUserId",
+			"value": "1974",
+			"type": "string"
+		},
+		{
+			"key": "testUserFirstName",
+			"value": "skv",
+			"type": "string"
+		},
+		{
+			"key": "testUserLastName",
+			"value": "1974",
+			"type": "string"
+		},
+		{
+			"key": "testUserEmail",
+			"value": "email@email.com",
+			"type": "string"
+		},
+		{
+			"key": "testUserPhone",
+			"value": "+7 000 121-45-67",
+			"type": "string"
+		},
+		{
+			"key": "testUserStatus",
+			"value": "4791",
+			"type": "string"
+		}
+	]
+}
